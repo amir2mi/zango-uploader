@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import FilePicker from "./components/FilePicker";
 
 function App() {

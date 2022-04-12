@@ -1,9 +1,11 @@
 :root {
   direction: rtl;
   unicode-bidi: bidi-override;
+  --primary-color: #415a71;
 }
 
 body {
+  background: #eff2f6;
   margin: 0;
   font-family: "Vazirmatn", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -12,4 +14,40 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.9em;
+  outline: none;
+  text-decoration: none;
+  text-transform: initial;
+  padding: 0.5em 1.25em;
+  margin: 0.5em;
+  color: #fff;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 1em;
+  transition: all 0.2s ease-in-out;
+}
+
+[hidden] {
+  display: none !important;
 }

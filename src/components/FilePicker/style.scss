@@ -1,176 +1,105 @@
-// Vars and Reset
-//
-$theme: #454cad;
-$dark-text: #5f6982;
-
-html,
-body,
-* {
-  box-sizing: border-box;
-  font-size: 16px;
-}
-html,
-body {
-  height: 100%;
-  text-align: center;
-}
-body {
+.uploader-wrapper {
   padding: 2rem;
-  background: #f8f8f8;
 }
 
-h2 {
-  font-family: "Roboto", sans-serif;
-  font-size: 26px;
-  line-height: 1;
-  color: $theme;
-  margin-bottom: 0;
-}
-p {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  color: $dark-text;
-}
-// Upload Demo
-//
 .uploader {
-  display: block;
-  clear: both;
+  display: flex;
   margin: 0 auto;
-  width: 100%;
-  max-width: 600px;
-
-  label {
-    float: left;
-    clear: both;
-    width: 100%;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    background: #fff;
-    border-radius: 7px;
-    border: 3px solid #eee;
-    transition: all 0.2s ease;
-    user-select: none;
-
-    &:hover {
-      border-color: $theme;
-    }
-    &.hover {
-      border: 3px solid $theme;
-      box-shadow: inset 0 0 0 6px #eee;
-
-      #start {
-        i.fa {
-          transform: scale(0.8);
-          opacity: 0.3;
-        }
-      }
-    }
-  }
-
-  #start {
-    float: left;
-    clear: both;
-    width: 100%;
-    &.hidden {
-      display: none;
-    }
-    i.fa {
-      font-size: 50px;
-      margin-bottom: 1rem;
-      transition: all 0.2s ease-in-out;
-    }
-  }
-  #response {
-    float: left;
-    clear: both;
-    width: 100%;
-    &.hidden {
-      display: none;
-    }
-    #messages {
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  #file-image {
-    display: inline;
-    margin: 0 auto 0.5rem auto;
-    width: auto;
-    height: auto;
-    max-width: 180px;
-    &.hidden {
-      display: none;
-    }
-  }
-
-  #notimage {
-    display: block;
-    float: left;
-    clear: both;
-    width: 100%;
-    &.hidden {
-      display: none;
-    }
-  }
-
-  progress,
-  .progress {
-    // appearance: none;
-    display: inline;
-    clear: both;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 180px;
-    height: 8px;
-    border: 0;
-    border-radius: 4px;
-    background-color: #eee;
-    overflow: hidden;
-  }
-
-  .progress[value]::-webkit-progress-bar {
-    border-radius: 4px;
-    background-color: #eee;
-  }
-
-  .progress[value]::-webkit-progress-value {
-    background: linear-gradient(to right, darken($theme, 8%) 0%, $theme 50%);
-    border-radius: 4px;
-  }
-  .progress[value]::-moz-progress-bar {
-    background: linear-gradient(to right, darken($theme, 8%) 0%, $theme 50%);
-    border-radius: 4px;
-  }
+  padding: 1.5em;
+  width: 600px;
+  max-width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 0.5em 3em rgb(109, 141, 171, 0.1);
+  border-radius: 3em;
 
   input[type="file"] {
     display: none;
   }
 
-  div {
-    margin: 0 0 0.5rem 0;
-    color: $dark-text;
+  .select-button {
+    margin-top: 1em;
+    font-size: 1em;
   }
-  .btn {
-    display: inline-block;
-    margin: 0.5rem 0.5rem 1rem 0.5rem;
-    clear: both;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-    text-decoration: none;
-    text-transform: initial;
-    border: none;
-    border-radius: 0.2rem;
-    outline: none;
-    padding: 0 1rem;
-    height: 36px;
-    line-height: 36px;
-    color: #fff;
-    transition: all 0.2s ease-in-out;
-    box-sizing: border-box;
-    background: $theme;
-    border-color: $theme;
-    cursor: pointer;
+}
+
+.upload-label {
+  user-select: none;
+  text-align: center;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border: 3px dashed transparent;
+  border-radius: 2em;
+  transition: all 0.2s ease;
+  &:hover,
+  &.dragged {
+    .upload-icon {
+      .arrow {
+        animation: floating ease 1s infinite;
+      }
+    }
+  }
+
+  &.dragged {
+    border-color: var(--primary-color);
+
+    .upload-icon {
+      transform: scale(0.8);
+      opacity: 0.1;
+    }
+  }
+}
+
+.upload-icon {
+  width: 7.5em;
+  margin-bottom: 1em;
+  opacity: 0.3;
+  transition: all ease 0.2s;
+}
+
+.file-upload,
+.upload-start,
+.upload-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.upload-info {
+  .progress {
+    width: 10em;
+
+    .CircularProgressbar-text,
+    .CircularProgressbar-path {
+      fill: var(--primary-color);
+    }
+
+    .CircularProgressbar-text {
+      font-size: 1em;
+    }
+  }
+}
+
+.upload-message {
+  font-size: 0.9em;
+  padding-top: 1em;
+  color: var(--primary-color);
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(0.75em);
+  }
+  50% {
+    transform: translateY(-0.75em);
+  }
+  75% {
+    transform: translateY(0);
   }
 }
