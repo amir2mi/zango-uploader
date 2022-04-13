@@ -30,6 +30,7 @@
   text-align: center;
   width: 100%;
   padding: 2rem 1.5rem;
+  color: var(--primary-color);
   background: #fff;
   border: 2px dashed transparent;
   border-radius: 2em;
@@ -57,6 +58,7 @@
 .upload-icon {
   width: 7.5em;
   margin-bottom: 1em;
+  fill: var(--primary-color);
   opacity: 0.3;
   transition: all ease 0.2s;
 }

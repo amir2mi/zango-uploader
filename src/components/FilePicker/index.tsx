@@ -5,7 +5,6 @@ import sendToast from "../../utils/toast";
 import CopyToClipboard from "../CopyToClipboard";
 import { ReactComponent as Upload } from "../../assets/svg/upload.svg";
 import "./style.scss";
-import clsx from "clsx";
 
 interface FilePickerProps {
   [key: string]: any;
