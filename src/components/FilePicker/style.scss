@@ -1,5 +1,9 @@
 .uploader-wrapper {
-  padding: 2rem;
+  padding: 2em;
+
+  @media (max-width: 575px) {
+    padding: 2em 1em;
+  }
 }
 
 .uploader {
@@ -13,7 +17,7 @@
   height: 100%;
   background: #fff;
   box-shadow: 0 0.5em 3em rgb(109, 141, 171, 0.1);
-  border-radius: 3em;
+  border-radius: 2em;
 
   input[type="file"] {
     display: none;
@@ -96,13 +100,19 @@
 
 .uploaded-list-wrapper {
   overflow: hidden;
+  position: relative;
+  top: -1em;
   width: 500px;
-  max-width: 100%;
-  padding: 2em;
+  max-width: 90%;
+  padding: 3em 2em 2em;
   margin: 0 auto;
   background: #fff;
   box-shadow: 0 1em 3em rgb(109, 141, 171, 0.1);
-  border-radius: 0 0 2em 2em;
+  border-radius: 0 0 1em 1em;
+
+  @media (max-width: 575px) {
+    padding: 2em 1em 1em;
+  }
 
   .uploaded-list {
     overflow-y: auto;
