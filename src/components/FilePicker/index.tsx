@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import { CircularProgressbar } from "react-circular-progressbar";
+import sendToast from "../../utils/toast";
+import CopyToClipboard from "../CopyToClipboard";
 import { ReactComponent as Upload } from "../../assets/svg/upload.svg";
 import "./style.scss";
 
@@ -37,11 +39,12 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
   };
 
   const parseFile = (file: any) => {
-    const isBad = /\.(?=exe)/gi.test(file.name);
+    const isBad = !/\.(?=jpg|gif|jpeg|png|tiff|webp)/gi.test(file.name);
     if (isBad) {
       setIsAccepted(false);
       setIsUploading(false);
-      setMessage("نوع فایل موردنظر پشتیبانی نمی‌شود.");
+      setMessage("");
+      sendToast("نوع فایل موردنظر پشتیبانی نمی‌شود.");
     } else {
       setIsAccepted(true);
       setMessage(encodeURI(file.name));
@@ -72,7 +75,7 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
     } else {
       setIsAccepted(false);
       setIsUploading(false);
-      setMessage(`حجم فایل موردنظر باید کمتر از ${fileSizeLimit} مگابایت باشد.`);
+      sendToast(`حجم فایل موردنظر باید کمتر از ${fileSizeLimit} مگابایت باشد.`);
     }
   };
 
@@ -111,21 +114,22 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
                 className="progress"
                 value={uploadPercent}
                 text={`${uploadPercent}%`}
-                strokeWidth={3}
+                strokeWidth={2}
               />
             </div>
           )}
           {message && <div className="upload-message">{message}</div>}
         </label>
       </form>
-      <div className="uploaded-list">
-        {uploadedList?.map((item) => (
-          <div>
-            <input type="text" readOnly value={item} />
-            <button>Copy</button>
+      {uploadedList.length > 0 && (
+        <div className="uploaded-list-wrapper toast-in">
+          <div className="uploaded-list">
+            {uploadedList.map((item) => (
+              <CopyToClipboard key={item} value={item} />
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

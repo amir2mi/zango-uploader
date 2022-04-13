@@ -3,6 +3,8 @@
 }
 
 .uploader {
+  position: relative;
+  z-index: 1;
   display: flex;
   margin: 0 auto;
   padding: 1.5em;
@@ -32,7 +34,7 @@
   border: 3px dashed transparent;
   border-radius: 2em;
   transition: all 0.2s ease;
-  
+
   &:hover,
   &.dragged {
     .upload-icon {
@@ -72,22 +74,45 @@
 .upload-info {
   .progress {
     width: 10em;
-
-    .CircularProgressbar-text,
     .CircularProgressbar-path {
-      fill: var(--primary-color);
+      stroke: var(--primary-color);
     }
 
     .CircularProgressbar-text {
       font-size: 1em;
+      fill: var(--primary-color);
     }
   }
 }
 
 .upload-message {
   font-size: 0.9em;
-  padding-top: 1em;
+  padding-top: 1.5em;
   color: var(--primary-color);
+}
+
+.uploaded-list-wrapper {
+  overflow: hidden;
+  width: 500px;
+  max-width: 100%;
+  padding: 2em;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 1em 3em rgb(109, 141, 171, 0.1);
+  border-radius: 0 0 2em 2em;
+
+  .uploaded-list {
+    overflow-y: auto;
+    max-height: max(30vh, 200px);
+  }
+
+  .copy-to-clipboard {
+    animation: toast-in ease 0.25s both;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5em;
+    }
+  }
 }
 
 @keyframes floating {

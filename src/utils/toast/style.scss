@@ -6,7 +6,7 @@
 .Toastify__toast {
   direction: rtl !important;
   font-family: inherit;
-  font-size: 0.9em;
+  font-size: 0.85em;
   border-radius: 1em;
   box-shadow: 0 0.32em 1.5em rgb(109, 141, 171, 0.1);
 }
@@ -20,8 +20,9 @@
 }
 
 .Toastify__progress-bar {
-  transform-origin: right;
+  height: 0.125em;
   border-radius: 1em;
+  transform-origin: right;
 }
 
 .toast-in {

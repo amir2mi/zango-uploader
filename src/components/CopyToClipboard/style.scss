@@ -1,0 +1,38 @@
+.copy-to-clipboard {
+  position: relative;
+
+  .input-box {
+    width: 100%;
+    padding-left: 3em;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1em;
+    padding: 0 0.75em 0 0.9em;
+    margin: auto 0;
+    background: transparent;
+    border: none;
+    border-radius: 1em;
+
+    &:active {
+      svg {
+        transform: scale(0.75);
+        opacity: 0.5;
+      }
+    }
+
+    svg {
+      width: 1em;
+      height: 1em;
+      fill: var(--primary-color);
+      transition: all ease 0.15s;
+    }
+  }
+}
