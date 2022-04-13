@@ -5,6 +5,7 @@ import sendToast from "../../utils/toast";
 import CopyToClipboard from "../CopyToClipboard";
 import { ReactComponent as Upload } from "../../assets/svg/upload.svg";
 import "./style.scss";
+import clsx from "clsx";
 
 interface FilePickerProps {
   [key: string]: any;
@@ -12,12 +13,14 @@ interface FilePickerProps {
 }
 
 export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
-  const labelRef = useRef<HTMLLabelElement>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isAccepted, setIsAccepted] = useState(false);
   const [uploadPercent, setUploadPercent] = useState(0);
   const [message, setMessage] = useState("");
+  const [labelClasses, setLabelClasses] = useState("upload-label");
   const [uploadedList, setUploadedList] = useState<string[]>([]);
+
+  const uploadedListScrollable = useRef<HTMLDivElement>(null);
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -27,15 +30,16 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
   };
 
   const onDragCheck = (e: any) => {
-    e.stopPropagation();
     e.preventDefault();
+    e.stopPropagation();
 
     // reset upload progress
-    setUploadPercent(0);
-
-    if (labelRef.current) {
-      labelRef.current.className = e.type === "dragover" ? "dragged" : "upload-label";
+    if (e.type !== "dragover") {
+      setUploadPercent(0);
     }
+
+    // if file is dropped directly add effect
+    setLabelClasses(e.type === "dragover" ? "dragged upload-label" : "upload-label");
   };
 
   const parseFile = (file: any) => {
@@ -68,7 +72,16 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
             setUploadPercent(percent > 100 ? 100 : percent);
           },
         });
+
+        // add to uploaded list
         setUploadedList((old) => [...old, data.secure_url]);
+        // scroll to the bottom of uploaded list
+        setTimeout(() => {
+          if (uploadedListScrollable.current) {
+            const height = uploadedListScrollable.current.scrollHeight;
+            uploadedListScrollable.current.scroll({ top: height, behavior: "smooth" });
+          }
+        }, 100);
       } catch (e) {
         console.error(e);
       }
@@ -95,9 +108,8 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
       <form className="uploader" onSubmit={onSubmit}>
         <input type="file" id="file-upload" name="fileUpload" onChange={fileSelectHandler} multiple />
         <label
-          ref={labelRef}
           htmlFor="file-upload"
-          className="upload-label"
+          className={labelClasses}
           onDragLeave={onDragCheck}
           onDragOver={onDragCheck}
           onDrop={fileSelectHandler}
@@ -123,7 +135,7 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
       </form>
       {uploadedList.length > 0 && (
         <div className="uploaded-list-wrapper toast-in">
-          <div className="uploaded-list">
+          <div ref={uploadedListScrollable} className="uploaded-list">
             {uploadedList.map((item) => (
               <CopyToClipboard key={item} value={item} />
             ))}
