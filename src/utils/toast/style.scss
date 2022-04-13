@@ -1,0 +1,57 @@
+:root {
+  --toastify-toast-min-height: 3em;
+  --toastify-color-progress-light: var(--primary-color);
+}
+
+.Toastify__toast {
+  direction: rtl !important;
+  font-family: inherit;
+  font-size: 0.9em;
+  border-radius: 1em;
+  box-shadow: 0 0.32em 1.5em rgb(109, 141, 171, 0.1);
+}
+
+.Toastify__toast-body {
+  margin: 0;
+}
+
+.Toastify__close-button {
+  display: none;
+}
+
+.Toastify__progress-bar {
+  transform-origin: right;
+  border-radius: 1em;
+}
+
+.toast-in {
+  animation: toast-in ease 0.25s both;
+}
+
+.toast-out {
+  animation: toast-down ease 0.25s both;
+}
+
+@keyframes toast-in {
+  0% {
+    transform: translateY(-0.5em);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-down {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-0.5em);
+    opacity: 0;
+  }
+}
