@@ -37,6 +37,16 @@
   animation: toast-out ease 0.25s both;
 }
 
+@media (max-width: 480px) {
+  .Toastify__toast {
+    border-radius: 0 !important;
+  }
+
+  .Toastify__toast-container {
+    right: 0;
+  }
+}
+
 @keyframes toast-in {
   0% {
     transform: scale(0.95) translateY(-0.5em);
