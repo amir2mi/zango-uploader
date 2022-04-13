@@ -29,30 +29,44 @@
   animation: toast-in ease 0.25s both;
 }
 
+.toast-in-linear {
+  animation: toast-in-linear ease 0.4s both;
+}
+
 .toast-out {
-  animation: toast-down ease 0.25s both;
+  animation: toast-out ease 0.25s both;
 }
 
 @keyframes toast-in {
   0% {
-    transform: translateY(-0.5em);
+    transform: scale(0.95) translateY(-0.5em);
     opacity: 0;
   }
 
   100% {
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
     opacity: 1;
   }
 }
 
-@keyframes toast-down {
+@keyframes toast-in-linear {
   0% {
+    transform: translateY(-3em);
+  }
+
+  100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  0% {
+    transform: scale(1) translateY(0);
     opacity: 1;
   }
 
   100% {
-    transform: translateY(-0.5em);
+    transform: scale(0.95) translateY(-0.5em);
     opacity: 0;
   }
 }

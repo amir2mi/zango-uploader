@@ -82,11 +82,15 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
           }
         }, 100);
       } catch (e) {
-        console.error(e);
+        setIsAccepted(false);
+        setIsUploading(false);
+        setMessage("");
+        sendToast("مشکلی در آپلود فایل پیش آمد، مجددا امتحان کنید.");
       }
     } else {
       setIsAccepted(false);
       setIsUploading(false);
+      setMessage("");
       sendToast(`حجم فایل موردنظر باید کمتر از ${fileSizeLimit} مگابایت باشد.`);
     }
   };
@@ -133,7 +137,7 @@ export default function FilePicker({ fileSizeLimit }: FilePickerProps) {
         </label>
       </form>
       {uploadedList.length > 0 && (
-        <div className="uploaded-list-wrapper toast-in">
+        <div className="uploaded-list-wrapper toast-in-linear">
           <div ref={uploadedListScrollable} className="uploaded-list">
             {uploadedList.map((item) => (
               <CopyToClipboard key={item} value={item} />
